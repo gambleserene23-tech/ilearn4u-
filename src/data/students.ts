@@ -1,0 +1,117 @@
+import type { Student, Parent } from "./types";
+
+/**
+ * DEMO DATA — fictional students. `stu_001` (Maya Chen) is used as the
+ * "signed in" demo student across the Student and Parent portals.
+ */
+export const students: Student[] = [
+  {
+    id: "stu_001",
+    userId: "user_maya",
+    fullName: "Maya Chen",
+    age: 17,
+    location: "Brisbane, QLD",
+    schoolId: "sch_riverbend",
+    educationLevel: "Year 12",
+    careerGoals: "I'd like to work in software development or product design.",
+    interests: ["Technology", "Creative Industries"],
+    skills: ["JavaScript basics", "Teamwork", "Communication"],
+    preferredType: "internship",
+    avatarColor: "brand-green",
+  },
+  {
+    id: "stu_002",
+    userId: "user_jordan",
+    fullName: "Jordan Ahmadi",
+    age: 17,
+    location: "Gold Coast, QLD",
+    schoolId: "sch_riverbend",
+    educationLevel: "Year 12",
+    careerGoals: "Interested in a trade — carpentry or construction management.",
+    interests: ["Construction"],
+    skills: ["Reliable", "Practical problem solving"],
+    preferredType: "apprenticeship",
+    avatarColor: "brand-orange",
+  },
+  {
+    id: "stu_003",
+    userId: "user_amelia",
+    fullName: "Amelia Ferreira",
+    age: 16,
+    location: "Brisbane, QLD",
+    schoolId: "sch_riverbend",
+    educationLevel: "Year 11",
+    careerGoals: "Hoping to explore healthcare and allied health careers.",
+    interests: ["Healthcare"],
+    skills: ["Empathetic", "Organised"],
+    preferredType: "work-experience",
+    avatarColor: "brand-tan-dark",
+  },
+  {
+    id: "stu_004",
+    userId: "user_liam",
+    fullName: "Liam Whitfield",
+    age: 18,
+    location: "Toowoomba, QLD",
+    schoolId: "sch_hillcrest",
+    educationLevel: "Year 12",
+    careerGoals: "Considering mechanical or civil engineering at university.",
+    interests: ["Engineering"],
+    skills: ["Maths", "CAD basics"],
+    preferredType: "headstart",
+    avatarColor: "brand-green",
+  },
+  {
+    id: "stu_005",
+    userId: "user_sophie",
+    fullName: "Sophie Tran",
+    age: 17,
+    location: "Sunshine Coast, QLD",
+    schoolId: "sch_coastal",
+    educationLevel: "Year 12",
+    careerGoals: "Interested in hospitality management and events.",
+    interests: ["Hospitality"],
+    skills: ["Customer service", "Time management"],
+    preferredType: "internship",
+    avatarColor: "brand-orange",
+  },
+  {
+    id: "stu_006",
+    userId: "user_noah",
+    fullName: "Noah Petersen",
+    age: 16,
+    location: "Brisbane, QLD",
+    schoolId: "sch_riverbend",
+    educationLevel: "Year 11",
+    careerGoals: "Wants to explore design and animation as a career.",
+    interests: ["Creative Industries"],
+    skills: ["Illustration", "Storyboarding"],
+    preferredType: "trainship",
+    avatarColor: "brand-tan-dark",
+  },
+  { id:"stu_007", userId:"user_007", fullName:"Ella Morgan", age:16, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 11", careerGoals:"Explore law, public policy and communications.", interests:["Law","Communications"], skills:["Writing","Research"], preferredType:"headstart", avatarColor:"brand-green" },
+  { id:"stu_008", userId:"user_008", fullName:"Oscar Williams", age:17, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 12", careerGoals:"Explore electrical engineering and renewable energy.", interests:["Engineering","Energy"], skills:["Maths","Problem solving"], preferredType:"apprenticeship", avatarColor:"brand-orange" },
+  { id:"stu_009", userId:"user_009", fullName:"Isla Nguyen", age:16, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 11", careerGoals:"Learn more about medicine and health sciences.", interests:["Healthcare","Science"], skills:["Biology","Teamwork"], preferredType:"work-experience", avatarColor:"brand-tan-dark" },
+  { id:"stu_010", userId:"user_010", fullName:"Henry Taylor", age:17, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 12", careerGoals:"Build practical skills in construction and project management.", interests:["Construction","Business"], skills:["Leadership","Practical skills"], preferredType:"trainship", avatarColor:"brand-green" },
+  { id:"stu_011", userId:"user_011", fullName:"Mia Patel", age:15, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 10", careerGoals:"Explore graphic design, media and digital content.", interests:["Creative Industries","Media"], skills:["Design","Presentation"], preferredType:"internship", avatarColor:"brand-orange" },
+  { id:"stu_012", userId:"user_012", fullName:"William Scott", age:18, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 12", careerGoals:"Explore accounting, finance and entrepreneurship.", interests:["Business","Finance"], skills:["Numeracy","Organisation"], preferredType:"headstart", avatarColor:"brand-green" },
+  { id:"stu_013", userId:"user_013", fullName:"Chloe Martin", age:17, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 12", careerGoals:"Explore environmental science and sustainability.", interests:["Environment","Science"], skills:["Research","Communication"], preferredType:"internship", avatarColor:"brand-tan-dark" },
+  { id:"stu_014", userId:"user_014", fullName:"Jack Wilson", age:16, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 11", careerGoals:"Explore automotive technology and mechanical trades.", interests:["Automotive","Engineering"], skills:["Practical problem solving","Reliability"], preferredType:"apprenticeship", avatarColor:"brand-orange" },
+  { id:"stu_015", userId:"user_015", fullName:"Ava Brown", age:17, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 12", careerGoals:"Explore psychology, youth services and education.", interests:["Psychology","Education"], skills:["Listening","Empathy"], preferredType:"work-experience", avatarColor:"brand-green" },
+  { id:"stu_016", userId:"user_016", fullName:"Leo Anderson", age:17, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 12", careerGoals:"Explore software engineering and data analytics.", interests:["Technology","Data"], skills:["Python basics","Logic"], preferredType:"internship", avatarColor:"brand-orange" },
+  { id:"stu_017", userId:"user_017", fullName:"Grace Evans", age:16, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 11", careerGoals:"Explore tourism, events and hospitality.", interests:["Hospitality","Events"], skills:["Customer service","Teamwork"], preferredType:"trainship", avatarColor:"brand-tan-dark" },
+  { id:"stu_018", userId:"user_018", fullName:"Lucas Thomas", age:18, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 12", careerGoals:"Explore civil engineering and urban development.", interests:["Engineering","Construction"], skills:["CAD basics","Maths"], preferredType:"headstart", avatarColor:"brand-green" },
+  { id:"stu_019", userId:"user_019", fullName:"Ruby Harris", age:15, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 10", careerGoals:"Explore veterinary science and animal care.", interests:["Animals","Healthcare"], skills:["Biology","Care"], preferredType:"work-experience", avatarColor:"brand-orange" },
+  { id:"stu_020", userId:"user_020", fullName:"Thomas Lee", age:17, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 12", careerGoals:"Explore cyber security and digital systems.", interests:["Technology","Cyber Security"], skills:["Problem solving","Computing"], preferredType:"internship", avatarColor:"brand-green" },
+  { id:"stu_021", userId:"user_021", fullName:"Sienna Clark", age:16, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 11", careerGoals:"Explore architecture and interior design.", interests:["Design","Architecture"], skills:["Sketching","Creative thinking"], preferredType:"internship", avatarColor:"brand-tan-dark" },
+  { id:"stu_022", userId:"user_022", fullName:"Noah King", age:17, location:"Brisbane, QLD", schoolId:"sch_riverbend", educationLevel:"Year 12", careerGoals:"Explore logistics, business operations and supply chains.", interests:["Business","Logistics"], skills:["Planning","Numeracy"], preferredType:"trainship", avatarColor:"brand-orange" },
+
+];
+
+export const parents: Parent[] = [
+  { id: "par_001", userId: "user_grace", studentIds: ["stu_001"] },
+];
+
+// The "signed in" demo identities used throughout the prototype.
+export const demoStudent = students[0];
+export const demoParent = parents[0];
