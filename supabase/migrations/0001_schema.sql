@@ -106,7 +106,7 @@ create table students (
   career_goals text,
   interests text[] not null default '{}',
   skills text[] not null default '{}',
-  preferred_opportunity_type text references opportunity_types (id), -- fk added after lookup table exists, see 0002
+  preferred_opportunity_type text, -- fk added below, once opportunity_types exists (see the ALTER TABLE further down)
   avatar_color text default '#0F3D2E',
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
