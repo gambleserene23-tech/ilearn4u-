@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site.config";
-import { getOpportunities } from "@/lib/services/opportunities";
+import { getPublicOpportunities } from "@/lib/services/opportunities";
 import { caseStudies } from "@/data/case-studies";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -23,9 +23,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${base}/legal/accessibility`, changeFrequency: "yearly", priority: 0.3 },
   ];
 
-  const opportunities = await getOpportunities();
-  const opportunityRoutes: MetadataRoute.Sitemap = opportunities.map((o) => ({
-    url: `${base}/opportunities/${o.id}`,
+  const opportunities = await getPublicOpportunities();
+  const opportunityRoutes: MetadataRoute.Sitemap = opportunities.map(({ opportunity }) => ({
+    url: `${base}/opportunities/${opportunity.id}`,
     changeFrequency: "weekly",
     priority: 0.8,
   }));

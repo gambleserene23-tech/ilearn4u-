@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { getOpportunities, getOrganisationName } from "@/lib/services/opportunities";
+import { getPublicOpportunities } from "@/lib/services/opportunities";
 import { opportunityTypes } from "@/config/opportunity-types";
 import { locationOptions, careerCategoryOptions } from "@/config/application-questions";
 import { OpportunityCard } from "@/components/domain/OpportunityCard";
@@ -20,7 +20,7 @@ export default async function OpportunitiesPage({
   const location = typeof params.location === "string" ? params.location : undefined;
   const industry = typeof params.industry === "string" ? params.industry : undefined;
 
-  const results = await getOpportunities({ type, location, industry });
+  const results = await getPublicOpportunities({ type, location, industry });
 
   return (
     <div>
@@ -68,8 +68,8 @@ export default async function OpportunitiesPage({
 
       <p className="mt-8 text-sm text-ink-soft">{results.length} opportunities found</p>
       <div className="mt-4 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {results.map((opp) => (
-          <OpportunityCard key={opp.id} opportunity={opp} organisationName={getOrganisationName(opp.organisationId)} />
+        {results.map(({ opportunity, organisationName }) => (
+          <OpportunityCard key={opportunity.id} opportunity={opportunity} organisationName={organisationName} />
         ))}
       </div>
       </div>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getOpportunityById, getOrganisationName, getOpportunities } from "@/lib/services/opportunities";
+import { getPublicOpportunityById, getPublicOpportunities } from "@/lib/services/opportunities";
 import { getOpportunityType } from "@/config/opportunity-types";
 import { LinkButton } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
@@ -10,20 +10,19 @@ import { formatDate } from "@/lib/utils";
 import { siteConfig } from "@/config/site.config";
 
 export async function generateStaticParams() {
-  const opportunities = await getOpportunities();
-  return opportunities.map((o) => ({ id: o.id }));
+  const opportunities = await getPublicOpportunities();
+  return opportunities.map(({ opportunity }) => ({ id: opportunity.id }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps<"/opportunities/[id]">): Promise<Metadata> {
   const { id } = await params;
-  const opportunity = await getOpportunityById(id);
-  if (!opportunity) return {};
-  const organisationName = getOrganisationName(opportunity.organisationId);
+  const result = await getPublicOpportunityById(id);
+  if (!result) return {};
   return {
-    title: `${opportunity.title} — ${organisationName}`,
-    description: opportunity.description,
+    title: `${result.opportunity.title} — ${result.organisationName}`,
+    description: result.opportunity.description,
   };
 }
 
@@ -31,11 +30,11 @@ export default async function OpportunityDetailPage({
   params,
 }: PageProps<"/opportunities/[id]">) {
   const { id } = await params;
-  const opportunity = await getOpportunityById(id);
-  if (!opportunity) notFound();
+  const result = await getPublicOpportunityById(id);
+  if (!result) notFound();
+  const { opportunity, organisationName } = result;
 
   const type = getOpportunityType(opportunity.type);
-  const organisationName = getOrganisationName(opportunity.organisationId);
 
   const jsonLd = {
     "@context": "https://schema.org",
