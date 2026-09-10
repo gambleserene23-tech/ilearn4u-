@@ -1,13 +1,34 @@
-import { getCurrentOrganisation } from "@/lib/services/organisations";
+"use client";
+
+import { useEffect, useState } from "react";
 import { siteConfig } from "@/config/site.config";
 import { StatCard } from "@/components/domain/StatAndPricing";
-import { Button } from "@/components/ui/Button";
 import { Alert } from "@/components/ui/Alert";
+import { SquareCardForm } from "@/components/domain/SquareCardForm";
 
-export default async function OrganisationBillingPage() {
-  const organisation = await getCurrentOrganisation();
-  const remaining = organisation.totalSlots - organisation.usedSlots;
+interface OrganisationSummary {
+  totalSlots: number;
+  usedSlots: number;
+}
+
+export default function OrganisationBillingPage() {
+  const [organisation, setOrganisation] = useState<OrganisationSummary | null>(null);
+  const [slots, setSlots] = useState(1);
   const { organisation: pricing, currencySymbol } = siteConfig.pricing;
+
+  useEffect(() => {
+    fetch("/api/organisation/current")
+      .then((r) => r.json())
+      .then(setOrganisation)
+      .catch(() => setOrganisation(null));
+  }, []);
+
+  if (!organisation) {
+    return <p className="text-ink-soft">Loading…</p>;
+  }
+
+  const remaining = organisation.totalSlots - organisation.usedSlots;
+  const totalCost = (slots * pricing.price).toFixed(2);
 
   return (
     <div className="max-w-xl">
@@ -29,7 +50,7 @@ export default async function OrganisationBillingPage() {
         </Alert>
       )}
 
-      <form className="mt-8 flex items-end gap-3">
+      <div className="mt-8 space-y-4 rounded-lg border border-black/5 bg-brand-tan/20 p-5">
         <div>
           <label htmlFor="slots" className="text-sm font-medium text-ink">
             Slots to purchase
@@ -39,16 +60,35 @@ export default async function OrganisationBillingPage() {
             name="slots"
             type="number"
             min={1}
-            defaultValue={1}
+            value={slots}
+            onChange={(e) => setSlots(Math.max(1, Number(e.target.value) || 1))}
             className="mt-1.5 w-32 rounded-md border border-black/10 px-3.5 py-2.5 text-sm"
           />
         </div>
-        <Button type="submit">Purchase slots</Button>
-      </form>
+
+        <SquareCardForm
+          amountLabel={`${currencySymbol}${totalCost} AUD`}
+          payButtonLabel={`Purchase ${slots} slot${slots === 1 ? "" : "s"}`}
+          onSubmitToken={async (sourceId) => {
+            const res = await fetch("/api/payments/organisation-slots", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ slots, sourceId }),
+            });
+            const result = await res.json();
+            if (result.success) {
+              setOrganisation((prev) =>
+                prev ? { ...prev, totalSlots: prev.totalSlots + slots } : prev
+              );
+            }
+            return result;
+          }}
+        />
+      </div>
 
       <p className="mt-4 text-xs text-ink-soft">
-        This demo does not process real payments. Connect a payment provider (see README) before
-        going live — billing will never claim a payment succeeded until it actually has.
+        Payments run through Square Sandbox — no real money moves until this switches to
+        Square&apos;s production keys (see docs/SQUARE_SETUP.md).
       </p>
     </div>
   );
