@@ -1,4 +1,5 @@
 import { faqs } from "@/config/faqs.config";
+import { safeJsonLd } from "@/lib/utils";
 
 /**
  * Renders the FAQ accordion plus matching FAQPage JSON-LD structured data.
@@ -31,7 +32,7 @@ export function FAQSection({ heading = "Frequently asked questions" }: { heading
       </div>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
     </section>
   );

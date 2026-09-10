@@ -6,7 +6,7 @@ import { LinkButton } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
 import { Alert } from "@/components/ui/Alert";
 import { Breadcrumbs } from "@/components/domain/Breadcrumbs";
-import { formatDate } from "@/lib/utils";
+import { formatDate, safeJsonLd } from "@/lib/utils";
 import { siteConfig } from "@/config/site.config";
 
 export async function generateStaticParams() {
@@ -55,7 +55,7 @@ export default async function OpportunityDetailPage({
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
       <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6">
       <div className="flex flex-wrap items-center gap-2">

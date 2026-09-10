@@ -10,7 +10,16 @@ export async function POST(request: Request) {
   const slots = Number(body?.slots);
   const sourceId = body?.sourceId;
 
-  if (!sourceId || typeof sourceId !== "string" || !Number.isInteger(slots) || slots < 1) {
+  // Upper bound stops a single request from attempting an enormous charge
+  // (typo, bug, or a deliberate abuse/card-testing attempt).
+  const MAX_SLOTS_PER_REQUEST = 50;
+  if (
+    !sourceId ||
+    typeof sourceId !== "string" ||
+    !Number.isInteger(slots) ||
+    slots < 1 ||
+    slots > MAX_SLOTS_PER_REQUEST
+  ) {
     return NextResponse.json({ success: false, reason: "Invalid request." }, { status: 400 });
   }
 

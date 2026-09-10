@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site.config";
+import { safeJsonLd } from "@/lib/utils";
 
 export interface Crumb {
   label: string;
@@ -45,7 +46,7 @@ export function Breadcrumbs({ items }: { items: Crumb[] }) {
       </ol>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLd(jsonLd) }}
       />
     </nav>
   );

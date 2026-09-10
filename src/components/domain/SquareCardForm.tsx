@@ -26,9 +26,11 @@ declare global {
   }
 }
 
+// Client-side code can only see NEXT_PUBLIC_-prefixed env vars — the
+// server-only SQUARE_ENVIRONMENT is invisible here, so this needs its own
+// public copy kept in sync with it (see .env.example).
 const SQUARE_SDK_SRC =
-  process.env.NEXT_PUBLIC_SQUARE_ENVIRONMENT === "production" ||
-  process.env.SQUARE_ENVIRONMENT === "production"
+  process.env.NEXT_PUBLIC_SQUARE_ENVIRONMENT === "production"
     ? "https://web.squarecdn.com/v1/square.js"
     : "https://sandbox.web.squarecdn.com/v1/square.js";
 
