@@ -74,6 +74,7 @@ export const siteConfig = {
       { label: "Opportunities", href: "/student/opportunities" },
       { label: "My Applications", href: "/student/applications" },
       { label: "Profile", href: "/student/profile" },
+      { label: "Pathway Quiz", href: "/student/quiz" },
       { label: "Messages", href: "/student/messages" },
     ],
     parent: [
@@ -85,6 +86,7 @@ export const siteConfig = {
     school: [
       { label: "Dashboard", href: "/school" },
       { label: "Students", href: "/school/students" },
+      { label: "Verifications", href: "/school/verifications" },
       { label: "Applications", href: "/school/applications" },
       { label: "Opportunities", href: "/school/opportunities" },
       { label: "Messages", href: "/school/messages" },

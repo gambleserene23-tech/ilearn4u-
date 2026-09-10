@@ -59,6 +59,36 @@ export async function getSchoolById(id: string): Promise<School | undefined> {
   return schools.find((s) => s.id === id);
 }
 
+export interface PendingStudent {
+  id: string;
+  fullName: string;
+  age: number;
+  location: string | null;
+  createdAt: string;
+}
+
+/** Real students awaiting this school's verification (see /school/verifications). */
+export async function getPendingStudentsForSchool(schoolId: string): Promise<PendingStudent[]> {
+  const supabase = await createSupabaseServerClient();
+  if (!supabase) return [];
+
+  const { data, error } = await supabase
+    .from("students")
+    .select("id, full_name, age, location, created_at")
+    .eq("school_id", schoolId)
+    .eq("verification_status", "pending")
+    .order("created_at", { ascending: true });
+
+  if (error || !data) return [];
+  return data.map((row) => ({
+    id: row.id,
+    fullName: row.full_name,
+    age: row.age,
+    location: row.location,
+    createdAt: row.created_at,
+  }));
+}
+
 export async function getSchoolStats(schoolId: string) {
   const schoolStudents = students.filter((s) => s.schoolId === schoolId);
   return {

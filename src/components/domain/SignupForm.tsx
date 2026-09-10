@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import Link from "next/link";
 import { roles } from "@/config/roles";
 import { Field, Input, Select } from "@/components/ui/Input";
@@ -10,11 +10,26 @@ import { locationOptions, careerCategoryOptions } from "@/config/application-que
 
 const SIGNUP_ROLES = roles.filter((r) => r.id !== "admin");
 
+interface SchoolOption {
+  id: string;
+  name: string;
+  suburb: string;
+}
+
 export function SignupForm() {
   const [role, setRole] = useState("student");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [schools, setSchools] = useState<SchoolOption[]>([]);
+
+  useEffect(() => {
+    if (role !== "student") return;
+    fetch("/api/schools/list")
+      .then((r) => r.json())
+      .then(setSchools)
+      .catch(() => setSchools([]));
+  }, [role]);
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -88,6 +103,20 @@ export function SignupForm() {
               {locationOptions().map((loc) => (
                 <option key={loc} value={loc}>
                   {loc}
+                </option>
+              ))}
+            </Select>
+          </Field>
+          <Field
+            label="School"
+            htmlFor="school_id"
+            helpText="Your school will need to verify your profile before it's fully active."
+          >
+            <Select id="school_id" name="school_id" defaultValue="">
+              <option value="">My school isn't listed yet</option>
+              {schools.map((s) => (
+                <option key={s.id} value={s.id}>
+                  {s.name} — {s.suburb}
                 </option>
               ))}
             </Select>

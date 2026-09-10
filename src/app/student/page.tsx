@@ -7,6 +7,7 @@ import { OpportunityCard } from "@/components/domain/OpportunityCard";
 import { StatCard } from "@/components/domain/StatAndPricing";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { LinkButton } from "@/components/ui/Button";
+import { Alert } from "@/components/ui/Alert";
 import { formatDate } from "@/lib/utils";
 
 export default async function StudentDashboardPage() {
@@ -31,6 +32,16 @@ export default async function StudentDashboardPage() {
     <div>
       <h1 className="text-2xl font-semibold text-brand-green">Welcome back, {student.fullName.split(" ")[0]}</h1>
       <p className="mt-1 text-ink-soft">{getSchoolName(student.schoolId)}</p>
+
+      {student.interests.length === 0 && (
+        <Alert tone="info" title="Not sure where to start?" className="mt-4">
+          Take the 2-minute pathway quiz and we&apos;ll suggest interests and an opportunity type
+          for your profile.{" "}
+          <Link href="/student/quiz" className="font-semibold underline">
+            Take the quiz →
+          </Link>
+        </Alert>
+      )}
 
       <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4">
         <StatCard label="Applications" value={applications.length} />
