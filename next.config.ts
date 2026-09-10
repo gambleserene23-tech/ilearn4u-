@@ -1,5 +1,11 @@
 import type { NextConfig } from "next";
 
+// Next.js dev mode (React Fast Refresh) needs 'unsafe-eval' to work at
+// all — without it, every client interaction silently fails in `next dev`
+// (found by testing the real login flow). Production builds never need
+// it, so keep it dev-only rather than weakening the real CSP.
+const isDev = process.env.NODE_ENV === "development";
+
 // Security headers applied to every response. See docs/SECURITY.md.
 const securityHeaders = [
   // Prevents the site from being embedded in an <iframe> on another
@@ -20,11 +26,11 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://sandbox.web.squarecdn.com https://web.squarecdn.com",
+      `script-src 'self' 'unsafe-inline' ${isDev ? "'unsafe-eval' " : ""}https://www.googletagmanager.com https://sandbox.web.squarecdn.com https://web.squarecdn.com`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: https:",
       "font-src 'self' data:",
-      "connect-src 'self' https://*.supabase.co https://connect.squareupsandbox.com https://connect.squareup.com https://www.google-analytics.com",
+      `connect-src 'self' https://*.supabase.co https://connect.squareupsandbox.com https://connect.squareup.com https://www.google-analytics.com${isDev ? " ws://localhost:* http://localhost:*" : ""}`,
       "frame-src 'self' https://sandbox.web.squarecdn.com https://web.squarecdn.com",
       "frame-ancestors 'none'",
     ].join("; "),
