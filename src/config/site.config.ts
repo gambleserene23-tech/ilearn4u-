@@ -133,6 +133,8 @@ export const siteConfig = {
         links: [
           { label: "Privacy Policy", href: "/legal/privacy" },
           { label: "Terms & Conditions", href: "/legal/terms" },
+          { label: "Copyright", href: "/legal/copyright" },
+          { label: "Disclaimer", href: "/legal/disclaimer" },
           { label: "Safeguarding", href: "/legal/safeguarding" },
           { label: "Accessibility", href: "/legal/accessibility" },
         ],
