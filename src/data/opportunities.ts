@@ -8,7 +8,7 @@ import type { Opportunity } from "./types";
  */
 export const opportunities: Opportunity[] = [
   {
-    id: "opp_001",
+    id: "50000000-0000-0000-0000-000000000001",
     organisationId: "org_northwave",
     title: "Junior Web Development Internship",
     type: "internship",
@@ -33,7 +33,7 @@ export const opportunities: Opportunity[] = [
     status: "open",
   },
   {
-    id: "opp_002",
+    id: "50000000-0000-0000-0000-000000000002",
     organisationId: "org_buildright",
     title: "Carpentry Apprenticeship Pathway",
     type: "apprenticeship",
@@ -58,7 +58,7 @@ export const opportunities: Opportunity[] = [
     status: "open",
   },
   {
-    id: "opp_003",
+    id: "50000000-0000-0000-0000-000000000003",
     organisationId: "org_careplus",
     title: "Healthcare Work Experience Week",
     type: "work-experience",
@@ -83,7 +83,7 @@ export const opportunities: Opportunity[] = [
     status: "open",
   },
   {
-    id: "opp_004",
+    id: "50000000-0000-0000-0000-000000000004",
     organisationId: "org_ferrotech",
     title: "Mechanical Engineering Trainship",
     type: "trainship",
@@ -108,7 +108,7 @@ export const opportunities: Opportunity[] = [
     status: "open",
   },
   {
-    id: "opp_005",
+    id: "50000000-0000-0000-0000-000000000005",
     organisationId: "org_stateuni",
     title: "Business & Commerce Headstart Program",
     type: "headstart",
@@ -133,7 +133,7 @@ export const opportunities: Opportunity[] = [
     status: "open",
   },
   {
-    id: "opp_006",
+    id: "50000000-0000-0000-0000-000000000006",
     organisationId: "org_harbourhotels",
     title: "Hospitality & Events Internship",
     type: "internship",
@@ -158,7 +158,7 @@ export const opportunities: Opportunity[] = [
     status: "open",
   },
   {
-    id: "opp_007",
+    id: "50000000-0000-0000-0000-000000000007",
     organisationId: "org_brightstudio",
     title: "Creative Design Trainship",
     type: "trainship",
@@ -183,7 +183,7 @@ export const opportunities: Opportunity[] = [
     status: "open",
   },
   {
-    id: "opp_008",
+    id: "50000000-0000-0000-0000-000000000008",
     organisationId: "org_coastaluni",
     title: "Allied Health University Program",
     type: "university-program",
@@ -208,7 +208,7 @@ export const opportunities: Opportunity[] = [
     status: "open",
   },
   {
-    id: "opp_009",
+    id: "50000000-0000-0000-0000-000000000009",
     organisationId: "org_northwave",
     title: "Data & Analytics Work Experience",
     type: "work-experience",
@@ -233,7 +233,7 @@ export const opportunities: Opportunity[] = [
     status: "open",
   },
   {
-    id: "opp_010",
+    id: "50000000-0000-0000-0000-000000000010",
     organisationId: "org_buildright",
     title: "Site Administration Headstart",
     type: "headstart",
@@ -258,7 +258,7 @@ export const opportunities: Opportunity[] = [
     status: "open",
   },
   {
-    id: "opp_011",
+    id: "50000000-0000-0000-0000-000000000011",
     organisationId: "org_stateuni",
     title: "Engineering Headstart Program",
     type: "headstart",
@@ -283,7 +283,7 @@ export const opportunities: Opportunity[] = [
     status: "open",
   },
   {
-    id: "opp_012",
+    id: "50000000-0000-0000-0000-000000000012",
     organisationId: "org_careplus",
     title: "Community Health Apprenticeship (Cert III)",
     type: "apprenticeship",
